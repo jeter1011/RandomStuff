@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "C:\\Users\\ENG-DESKTOP-4\\AppData\\Local\\Microsoft\\WindowsApps\\python3.9.exe"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+
+			{
+				"name": "Python: Remote Attach",
+				"type": "python",
+				"request": "attach",
+				"connect": {
+					"host": "localhost",
+					"port": 5678
+				},
+				"redirectOutput": true,
+				"pathMappings": [
+					{
+						"localRoot": "${workspaceFolder}",
+						"remoteRoot": "."
+					}
+				]
+			}
+		]
+	}
+}
