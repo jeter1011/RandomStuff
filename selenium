@@ -1,0 +1,74 @@
+# pip install selenium 
+
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome(ChromeDriverManager().install())
+
+driver.get("https://www.opticutter.com/linear-cut-list-calculator")
+
+# select available stock
+stock_length = driver.find_element(by=By.NAME, value='stocks[0].length')
+stock_length.send_keys("330")
+
+# submit form
+add_len = driver.find_element(by=By.CSS_SELECTOR, value="button[type='button'][class='btn btn-sm btn-outline-primary mb-2']")
+add_len.click()
+
+add_len2 = driver.find_element(by=By.CSS_SELECTOR, value="button[type='button'][class='btn btn-sm btn-outline-primary mb-2']")
+add_len2.click()
+
+stock_length = driver.find_element(by=By.NAME, value='stocks[1].length')
+stock_length.send_keys("350")
+
+stock_length = driver.find_element(by=By.NAME, value='stocks[2].length')
+stock_length.send_keys("430")
+
+#  select Kerf option of option
+kerf = driver.find_element(by=By.NAME, value='settings.kerf')
+kerf.send_keys("1")
+
+# select required parts
+required_length = driver.find_element(by=By.NAME, value="requirements[0].length")
+required_length.send_keys("66")
+
+# select required parts
+required_parts = driver.find_element(by=By.NAME, value="requirements[0].count")
+required_parts.send_keys("120")
+
+# required parts add button
+driver.find_element(by=By.XPATH, value="//button[@onclick=\"javascript:addRequirementsRow(1, 'Delete', true)\"]").click()
+driver.find_element(by=By.XPATH, value="//button[@onclick=\"javascript:addRequirementsRow(1, 'Delete', true)\"]").click()
+
+# select required parts
+required_length2 = driver.find_element(by=By.NAME, value="requirements[1].length")
+required_length2.send_keys("72")
+
+# select required parts
+required_parts2 = driver.find_element(by=By.NAME, value="requirements[1].count")
+required_parts2.send_keys("90")
+
+# select required parts
+required_length3 = driver.find_element(by=By.NAME, value="requirements[2].length")
+required_length3.send_keys("92")
+
+# select required parts
+required_parts3 = driver.find_element(by=By.NAME, value="requirements[2].count")
+required_parts3.send_keys("60")
+
+
+# submit form
+submit = driver.find_element(By.XPATH, value="//button[@title='solve']")
+submit.click()
+
+time.sleep(5)
+
+# scrape margin
+margin = driver.find_element(by=By.XPATH, value="//*[@id='navs-bottom-responsive-link-1']/div[1]/div[2]/div/table/tbody/tr[5]/td[2]")
+print(margin.text)
+
+driver.close()
